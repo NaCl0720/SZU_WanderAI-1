@@ -33,6 +33,9 @@ const logout = () => {
         :default-active="activeMenu"
         class="sidebar-menu"
         @select="handleMenuSelect"
+        text-color="#fff"
+        active-text-color="#fff"
+        background-color="#304156"
       >
         <el-menu-item index="merchant-dashboard">
           <el-icon><el-icon-monitor /></el-icon>
@@ -120,6 +123,18 @@ const logout = () => {
 .sidebar-menu {
   border-right: none;
   background-color: transparent;
+}
+
+.sidebar-menu :deep(.el-menu-item) {
+  color: #fff !important;
+}
+
+.sidebar-menu :deep(.el-menu-item.is-active) {
+  background-color: #263445;
+}
+
+.sidebar-menu :deep(.el-menu-item:hover) {
+  background-color: #263445;
 }
 
 .main-content {

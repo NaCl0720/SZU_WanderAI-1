@@ -6,7 +6,6 @@ import { useAuthStore } from '../../stores/auth'
 const router = useRouter()
 const authStore = useAuthStore()
 const activeMenu = ref(router.currentRoute.value.name)
-const roles = authStore.roles; 
 
 const handleMenuSelect = (index: string) => {
   router.push({ name: index })
@@ -32,13 +31,16 @@ const isRolesRoute = computed(() => {
     <div class="sidebar">
       <div class="logo">
         <h1>WanderAI</h1>
-        <p>管理平台 {{ authStore.user?.userName }}</p>
+        <p>管理平台</p>
       </div>
       
       <el-menu
         :default-active="activeMenu"
         class="sidebar-menu"
         @select="handleMenuSelect"
+        text-color="#fff"
+        active-text-color="#fff"
+        background-color="#304156"
       >
         <el-menu-item index="admin-dashboard">
           <el-icon><el-icon-monitor /></el-icon>
@@ -101,13 +103,9 @@ const isRolesRoute = computed(() => {
             </span>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item
-                  v-for="role in roles"
-                  :key="role"
-                  @click.native="switchRole('user')"
-                >
-                {{ role }}
-              </el-dropdown-item>
+                <el-dropdown-item @click="switchRole('user')">
+                  切换到用户
+                </el-dropdown-item>
                 <el-dropdown-item divided @click="logout">
                   退出登录
                 </el-dropdown-item>
@@ -160,6 +158,26 @@ const isRolesRoute = computed(() => {
 .sidebar-menu {
   border-right: none;
   background-color: transparent;
+}
+
+.sidebar-menu :deep(.el-menu-item) {
+  color: #fff !important;
+}
+
+.sidebar-menu :deep(.el-sub-menu__title) {
+  color: #fff !important;
+}
+
+.sidebar-menu :deep(.el-menu-item.is-active) {
+  background-color: #263445;
+}
+
+.sidebar-menu :deep(.el-menu-item:hover) {
+  background-color: #263445;
+}
+
+.sidebar-menu :deep(.el-sub-menu__title:hover) {
+  background-color: #263445;
 }
 
 .main-content {
